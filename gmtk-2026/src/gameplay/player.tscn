@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bfdvy6ycjo3p6"]
+
+[ext_resource type="Script" uid="uid://dae1t8ny86kln" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_4j6do"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_oyjl1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4j6do"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4j6do"]
+
+[node name="player" type="CharacterBody3D" unique_id=2107680255]
+script = ExtResource("1_4j6do")
+metadata/_custom_type_script = "uid://dae1t8ny86kln"
+
+[node name="Head" type="Node3D" parent="." unique_id=323156219 instance=ExtResource("2_oyjl1")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=874624160]
+mesh = SubResource("CapsuleMesh_4j6do")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=315300246]
+shape = SubResource("CapsuleShape3D_4j6do")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=353700703]
+
+[node name="jump_timer" type="Timer" parent="." unique_id=1617293413]
+wait_time = 0.5
+one_shot = true
+
+[node name="dash_timer" type="Timer" parent="." unique_id=1281444121]
+wait_time = 0.5
+one_shot = true
+
+[node name="player_hud" type="Control" parent="." unique_id=1949696362]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="timeout" from="jump_timer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

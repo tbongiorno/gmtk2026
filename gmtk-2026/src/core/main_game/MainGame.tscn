@@ -1,21 +1,25 @@
 [gd_scene format=3 uid="uid://6i55fu3ajr3g"]
 
+[ext_resource type="Script" uid="uid://b04e6hsaqfmp1" path="res://src/core/main_game/main_game.gd" id="1_l3iix"]
+
 [node name="MainGame" type="Node" unique_id=1670218661]
+script = ExtResource("1_l3iix")
 
 [node name="Systems" type="Node" parent="." unique_id=90150011]
 
-[node name="World" type="Node2D" parent="." unique_id=1490406663]
+[node name="World" type="Node3D" parent="." unique_id=1872853913]
 
-[node name="LevelRoot" type="Node2D" parent="World" unique_id=139687101]
+[node name="LevelRoot" type="Node3D" parent="World" unique_id=1424433449]
 unique_name_in_owner = true
 
-[node name="EntityRoot" type="Node2D" parent="World" unique_id=1636883745]
+[node name="EntityRoot" type="Node3D" parent="World" unique_id=370315764]
 unique_name_in_owner = true
 
-[node name="EffectRoot" type="Node2D" parent="World" unique_id=504739919]
+[node name="EffectRoot" type="Node3D" parent="World" unique_id=2137020043]
 unique_name_in_owner = true
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1279813614]
+layer = 10
 
 [node name="HudRoot" type="Control" parent="HudLayer" unique_id=1369151842]
 unique_name_in_owner = true
@@ -25,6 +29,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=357698129]
+layer = 20
 
 [node name="PauseLayer" type="Control" parent="PauseLayer" unique_id=857439712]
 unique_name_in_owner = true
@@ -34,6 +39,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=1402105732]
+layer = 100
 
 [node name="TransitionLayer" type="Control" parent="TransitionLayer" unique_id=1675573622]
 unique_name_in_owner = true
@@ -43,6 +49,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1438404093]
+layer = 158
 
 [node name="DebugLayer" type="Control" parent="DebugLayer" unique_id=669495913]
 unique_name_in_owner = true
