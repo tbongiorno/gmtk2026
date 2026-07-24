@@ -80,6 +80,12 @@ func _place_player_at_level_spawn():
 		return
 	
 	player.global_position = current_level.get_default_player_spawn()
+	player.spawn_point = player.global_position
+	
+	player.base_jumps = current_level.jumps
+	player.base_dashes = current_level.dashes
+	player.base_shots = current_level.shots
+	player.reset_stats()
 
 func _place_enemies_in_level():
 	var enemy_scene : PackedScene = ResourceLoader.load(ENEMY) as PackedScene
@@ -96,4 +102,5 @@ func _place_enemies_in_level():
 			return
 		
 		entity_root.add_child(enemy)
+		enemy.name = "turret_enemy"
 		enemy.global_position = spawn.global_position

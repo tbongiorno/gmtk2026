@@ -25,3 +25,9 @@ func _on_shoot_timer_timeout():
 	bullets.add_child(new_bullet)
 	new_bullet.init_bullet(player)
 	print("Fired")
+
+
+func destroy():
+	##REMOVE BULLETS LATER
+	get_parent().get_parent().get_child(0).get_child(0).num_enemies -= 1
+	queue_free()

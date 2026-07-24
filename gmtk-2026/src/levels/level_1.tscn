@@ -10,21 +10,45 @@ size = Vector3(1, 5.171997, 19.08606)
 
 [node name="level_1" type="Node3D" unique_id=656179441]
 script = ExtResource("1_un1bx")
+jumps = 1
+dashes = 1
+shots = 2
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1025116185]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.042511, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8527203, 0, 0)
 use_collision = true
-size = Vector3(24.085022, 1, 20)
+size = Vector3(12.379581, 1, 6.941162)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1981236837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.352127, 3.2195678, -0.0029296875)
+use_collision = true
+size = Vector3(5.503937, 3.5483398, 6.8945313)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1504132059]
+transform = Transform3D(0.5089963, -0.8607687, 0, 0.8607687, 0.5089963, 0, 0, 0, 1, -1.9986627, 1.8155397, 0.1635766)
+use_collision = true
+size = Vector3(1, 7.0300293, 3.8515625)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=476148396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1501923, 2.2707214, -0.0029296875)
+use_collision = true
+size = Vector3(4.7452393, 3.5483398, 6.8945313)
 
 [node name="player_spawn" type="Marker3D" parent="." unique_id=687170292]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4164186, 1.7116716, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.907763, 5.543029, 0)
 
 [node name="enemy_spawn_points" type="Node3D" parent="." unique_id=2076746170]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0980229, 0)
 
 [node name="Marker3D" type="Marker3D" parent="enemy_spawn_points" unique_id=669810889]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5765495, 0, 6.03701)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="Marker3D2" type="Marker3D" parent="enemy_spawn_points" unique_id=823408800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.764311, 3.6885052, 0)
+
+[node name="Marker3D3" type="Marker3D" parent="enemy_spawn_points" unique_id=2063144889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.298412, 4.537738, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1152241063]
 environment = SubResource("Environment_q4bnd")
@@ -37,5 +61,12 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.591808, 1.2395859, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish_line" unique_id=2124977029]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0859985, 0.030822754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1945248, 2.0859985, 0.030822754)
 shape = SubResource("BoxShape3D_un1bx")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=2048654066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.822374, 2.8211794, -0.0029296875)
+use_collision = true
+size = Vector3(5.503937, 3.5483398, 6.8945313)
+
+[connection signal="body_entered" from="finish_line" to="." method="_on_finish_line_body_entered"]

@@ -75,6 +75,10 @@ var head_start_pos : Vector3
 var tick = 0
 
 @onready var player_hud = %player_hud
+var base_jumps : int = 0
+var base_dashes : int = 0
+var base_shots : int = 0
+
 var num_jumps : int = 1
 var num_dashes : int = 1
 var num_shots : int = 1
@@ -85,6 +89,8 @@ var is_sliding : bool = false
 var can_slide : bool = true
 
 var on_ramp : bool = false
+
+var spawn_point : Vector3 = Vector3(0, 0, 0)
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -121,7 +127,22 @@ func _physics_process(delta):
 func _process(delta):
 	if Engine.is_editor_hint():
 		return
-
+	
+	$RayCast3D.rotation.x = rotation_target_head
+	$RayCast3D.position = head_start_pos
+	
+	# Handle Shoot
+	if Input.is_action_just_pressed("shoot") and num_shots != 0:
+		
+		print($RayCast3D.get_collision_point())
+		var collider = $RayCast3D.get_collider()
+		if collider != null:
+			print(collider.get_parent().name)
+			if collider.get_parent().name.left(6) == "turret":
+				collider.get_parent().destroy()
+		num_shots -= 1
+		print(num_shots)
+	
 	if !UPDATE_PLAYER_ON_PHYS_STEP:
 		move_player(delta)
 		rotate_player(delta)
@@ -169,19 +190,21 @@ func move_player(delta):
 		# Set speed and accel to defualt
 		speed = SPEED + 7
 		accel = ACCEL * 10
-
+	
 	# Handle Jump.
 	if Input.is_action_just_pressed(KEY_BIND_JUMP) and is_on_floor() and num_jumps > 0:
 		velocity.y = JUMP_VELOCITY
 		is_jumping = true
-		#num_jump -= 1
 		$jump_timer.start()
+		num_jumps -= 1
+		print(num_jumps)
 		
 	# Handle Dash
 	if Input.is_action_just_pressed(KEY_BIND_DASH) and num_dashes > 0:
 		is_dashing = true
-		#num_dash -= 1
 		$dash_timer.start()
+		num_dashes -= 1
+		print(num_dashes)
 		
 	#Handle Slide
 	if Input.is_action_pressed("slide") and is_on_floor():
@@ -263,3 +286,10 @@ func _on_slide_timer_timeout():
 	
 func hit():
 	print("I've Been Hit")
+	global_position = spawn_point
+	reset_stats()
+
+func reset_stats():
+	num_jumps = base_jumps
+	num_dashes = base_dashes
+	num_shots = base_shots
