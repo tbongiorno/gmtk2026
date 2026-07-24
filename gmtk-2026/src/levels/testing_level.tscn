@@ -13,6 +13,9 @@ size = Vector3(6.807617, 4.773857, 10.897949)
 
 [node name="testing_level" type="Node3D" unique_id=1748714602]
 script = ExtResource("1_k2ka2")
+jumps = 5
+dashes = 5
+shots = 5
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1923642110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.042511, 0, 0)
