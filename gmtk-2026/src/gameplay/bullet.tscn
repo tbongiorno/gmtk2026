@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://brvi21mi4iukp"]
+
+[ext_resource type="Script" uid="uid://cxicc7g10m7gy" path="res://src/gameplay/bullet.gd" id="1_gpyf3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_agga2"]
+radius = 0.12764154
+
+[sub_resource type="SphereMesh" id="SphereMesh_gpyf3"]
+radius = 0.125
+height = 0.25
+
+[node name="bullet" type="Node3D" unique_id=816249390]
+script = ExtResource("1_gpyf3")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=213462540]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=554496672]
+shape = SubResource("SphereShape3D_agga2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=525120963]
+mesh = SubResource("SphereMesh_gpyf3")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

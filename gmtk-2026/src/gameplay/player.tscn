@@ -9,8 +9,6 @@
 
 [node name="player" type="CharacterBody3D" unique_id=2107680255]
 script = ExtResource("1_4j6do")
-DASH_VELOCITY = null
-SLIDE_VELOCITY = null
 metadata/_custom_type_script = "uid://dae1t8ny86kln"
 
 [node name="Head" parent="." unique_id=323156219 instance=ExtResource("2_oyjl1")]

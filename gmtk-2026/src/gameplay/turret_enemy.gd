@@ -2,7 +2,8 @@ class_name Enemy
 extends Node3D
 
 @onready var player = get_parent().get_node("player")
-@onready var bullet = $bullet
+@onready var bullets = $bullets
+var bullet = load("res://src/gameplay/bullet.tscn")
 
 var target_position = null
 var bullet_direction = null
@@ -16,24 +17,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	target_position = player.global_position
-	if bullet_moving:
-		bullet.global_position += bullet_direction * BULLET_SPEED * delta
+	pass
 
 
 func _on_shoot_timer_timeout():
-	bullet.get_child(1).disabled = true
-	bullet.position = Vector3(0, 0, 0)
-	bullet.show()
-	
-	bullet_direction = (global_position - target_position).normalized()
-	bullet.get_child(1).disabled = false
+	var new_bullet = bullet.instantiate()
+	bullets.add_child(new_bullet)
+	new_bullet.init_bullet(player)
 	print("Fired")
-
-func _on_bullet_body_entered(body):
-	if body.name == "player":
-		body.hit()
-	else:
-		bullet_moving = false
-		bullet.hide()
-		

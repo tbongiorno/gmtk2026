@@ -21,11 +21,13 @@ var enemy : Enemy = null
 @onready var transition_layer = $TransitionLayer
 @onready var debug_layer = $DebugLayer
 
-
 func _ready():
 	_init_player()
 	load_level(TEST_LEVEL)
-	
+
+func _process(delta: float) -> void:
+	pass
+
 	
 func _init_player():
 	var player_scene : PackedScene = ResourceLoader.load(PLAYER) as PackedScene
