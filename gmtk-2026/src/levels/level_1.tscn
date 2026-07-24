@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://334sld36crvk"]
+
+[ext_resource type="Script" uid="uid://255wnv0wwxei" path="res://src/levels/level.gd" id="1_un1bx"]
+
+[sub_resource type="Environment" id="Environment_q4bnd"]
+background_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_un1bx"]
+size = Vector3(1, 5.171997, 19.08606)
+
+[node name="level_1" type="Node3D" unique_id=656179441]
+script = ExtResource("1_un1bx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1025116185]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.042511, 0, 0)
+use_collision = true
+size = Vector3(24.085022, 1, 20)
+
+[node name="player_spawn" type="Marker3D" parent="." unique_id=687170292]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4164186, 1.7116716, 0)
+
+[node name="enemy_spawn_points" type="Node3D" parent="." unique_id=2076746170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0980229, 0)
+
+[node name="Marker3D" type="Marker3D" parent="enemy_spawn_points" unique_id=669810889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5765495, 0, 6.03701)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1152241063]
+environment = SubResource("Environment_q4bnd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=800772617]
+transform = Transform3D(0.37088326, 0.030879052, 0.928166, -0.5974898, 0.7730615, 0.2130304, -0.71095115, -0.63357913, 0.30516547, 0, 3.0407085, 0)
+shadow_enabled = true
+
+[node name="finish_line" type="Area3D" parent="." unique_id=1435774417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.591808, 1.2395859, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="finish_line" unique_id=2124977029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0859985, 0.030822754)
+shape = SubResource("BoxShape3D_un1bx")

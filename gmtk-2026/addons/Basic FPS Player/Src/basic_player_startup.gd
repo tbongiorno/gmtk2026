@@ -28,6 +28,8 @@ func _enter_tree():
 @export var IN_AIR_SPEED := 3.0
 @export var IN_AIR_ACCEL := 5.0
 @export var JUMP_VELOCITY := 4.5
+@export var DASH_VELOCITY := 4.5
+@export var SLIDE_VELOCITY := 3
 @export_subgroup("Head Bob")
 @export var HEAD_BOB := true
 @export var HEAD_BOB_FREQUENCY := 0.3
@@ -79,7 +81,10 @@ var num_shots : int = 1
 
 var is_jumping : bool = false
 var is_dashing : bool = false
-var is_sliding: bool = false
+var is_sliding : bool = false
+var can_slide : bool = true
+
+var on_ramp : bool = false
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -94,6 +99,11 @@ func _ready():
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
+	
+	if get_floor_angle() > 0.0 and get_floor_angle() < 1.0:
+		on_ramp = true
+	else:
+		on_ramp = false
 	
 	# Increment player tick, used in head bob motion
 	tick += 1
@@ -172,28 +182,53 @@ func move_player(delta):
 		is_dashing = true
 		#num_dash -= 1
 		$dash_timer.start()
+		
+	#Handle Slide
+	if Input.is_action_pressed("slide") and is_on_floor():
+		#if not is_sliding and not on_ramp:
+			#$slide_timer.start(0.5 * global_transform.basis.z.dot(velocity))
+		#if on_ramp:
+			#can_slide = true
+		is_sliding = true
+	else:
+		is_sliding = false
+		can_slide = true
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if direction and not is_jumping: # If there's a direction with no dash / jump
+	if direction and not is_jumping and not is_sliding: # If there's a direction with no dash / jump
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-	if is_dashing == true: # If dash without direction
+		#print(velocity)
+	
+	if is_sliding:
+		$Head.position.y = -0.25
+		
+		if can_slide and direction != Vector3(0, 0, 0):
+			if on_ramp:
+				speed = SPEED + 40
+				accel = 30
+				velocity.y = move_toward(velocity.y, direction.y + (speed / 2), accel * delta)
+			else:
+				speed = SPEED + 20
+				accel = 20
+			direction = direction + (transform.basis * Vector3(0, 0, -1.0)).normalized()
+			velocity.x = move_toward(velocity.x, direction.x * speed * 2, accel * delta)
+			velocity.z = move_toward(velocity.z, direction.z * speed * 2, accel * delta)
+			#print(velocity)
+			if is_jumping:
+				velocity.y = move_toward(velocity.y, direction.y * (speed * 2), accel * delta)
+	else:
+		$Head.position.y = 0
+	
+	if is_dashing: # If dash 
 		var horizontal_direction = (transform.basis * Vector3(0, 0, -1.0)).normalized()
 		velocity.x = (horizontal_direction.x * speed) + ((speed / 2) * direction.x)
 		velocity.z = (horizontal_direction.z * speed) + ((speed / 2) * direction.z)
-	if is_jumping == true: # If jump without direction
-		if is_sliding:
-			speed = SPEED + 20
-			accel = 20
-			direction = (transform.basis * Vector3(0, 0, -1.0)).normalized()
-			velocity.x = move_toward(velocity.x, direction.x * (speed * 2), accel * delta)
-			velocity.y = move_toward(velocity.y, direction.y + (speed / 2), accel * delta)
-			velocity.z = move_toward(velocity.z, direction.z * (speed * 2), accel * delta)
 	
-	if is_dashing == false: # If not dashing and no direction
+	if not is_dashing and not is_sliding: # If not dashing 
 		velocity.x = move_toward(velocity.x, direction.x * speed, accel * delta)
 		velocity.z = move_toward(velocity.z, direction.z * speed, accel * delta)
 
@@ -202,7 +237,7 @@ func move_player(delta):
 func head_bob_motion():
 	var pos = Vector3.ZERO
 	pos.y += sin(tick * HEAD_BOB_FREQUENCY) * HEAD_BOB_AMPLITUDE
-	pos.x += cos(tick * HEAD_BOB_FREQUENCY/2) * HEAD_BOB_AMPLITUDE * 2
+	pos.x += cos(tick * HEAD_BOB_FREQUENCY/2) * HEAD_BOB_AMPLITUDE 
 	$Head.position += pos
 
 func reset_head_bob(delta):
@@ -220,3 +255,11 @@ func _on_jump_timer_timeout():
 func _on_dash_timer_timeout():
 	print("Dashed")
 	is_dashing = false
+
+
+func _on_slide_timer_timeout():
+	print("End Slide")
+	can_slide = false
+	
+func hit():
+	print("I've Been Hit")

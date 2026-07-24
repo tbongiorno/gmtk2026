@@ -5,16 +5,16 @@ extends Node
 # FUTURE (main menu): Load test level for prototype
 const TEST_LEVEL : String = "uid://cx8wx8n140b6p"
 const PLAYER : String = "uid://bfdvy6ycjo3p6"
+const ENEMY : String = "uid://dahkw2wfumb0y"
 
 var player : Player = null
-
 var current_level: Level = null
+var enemy : Enemy = null
 
 #Game World Root Nodes
 @onready var level_root = %LevelRoot
 @onready var entity_root = %EntityRoot
 @onready var effect_root = %EffectRoot
-
 
 # UI Root Nodes
 @onready var hud_layer = $HudLayer
@@ -42,6 +42,7 @@ func _init_player():
 
 
 func load_level(level_scene: String) -> void:
+	print(level_scene)
 	_deferred_load_level.call_deferred(level_scene)
 
 func _deferred_load_level(level_scene_uid: String) -> void:
@@ -66,6 +67,7 @@ func _deferred_load_level(level_scene_uid: String) -> void:
 	
 	await get_tree().process_frame
 	_place_player_at_level_spawn()
+	_place_enemies_in_level()
 
 func _place_player_at_level_spawn():
 	if player == null:
@@ -76,7 +78,20 @@ func _place_player_at_level_spawn():
 		return
 	
 	player.global_position = current_level.get_default_player_spawn()
+
+func _place_enemies_in_level():
+	var enemy_scene : PackedScene = ResourceLoader.load(ENEMY) as PackedScene
+	if enemy_scene == null:
+		push_error("Could not load enemy scene: " + ENEMY)
+		return
 	
+	var enemy_spawns = current_level.get_node("enemy_spawn_points").get_children()
 	
-	
-	
+	for spawn in enemy_spawns:
+		enemy = enemy_scene.instantiate() as Enemy
+		if enemy == null:
+			push_error("Loaded enemy scene does not extend enemy or DNE: " + ENEMY)
+			return
+		
+		entity_root.add_child(enemy)
+		enemy.global_position = spawn.global_position

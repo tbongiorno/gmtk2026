@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dahkw2wfumb0y"]
+
+[ext_resource type="Script" uid="uid://mrhhkenwliye" path="res://src/gameplay/turret_enemy.gd" id="1_kf185"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mjck"]
+albedo_color = Color(0.3254902, 0.4, 0.80784315, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1mjck"]
+material = SubResource("StandardMaterial3D_1mjck")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kf185"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kf185"]
+radius = 0.125
+height = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kf185"]
+radius = 0.1294299
+
+[node name="turret_enemy" type="Node3D" unique_id=1957503470]
+script = ExtResource("1_kf185")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1311635339]
+mesh = SubResource("CylinderMesh_1mjck")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1968246628]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=842721733]
+shape = SubResource("CylinderShape3D_kf185")
+
+[node name="bullet" type="Area3D" parent="." unique_id=1216536943]
+visible = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="bullet" unique_id=199168904]
+mesh = SubResource("SphereMesh_kf185")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bullet" unique_id=2019152610]
+shape = SubResource("SphereShape3D_kf185")
+disabled = true
+
+[node name="shoot_timer" type="Timer" parent="." unique_id=1010215900]
+autostart = true
+
+[node name="bullets" type="Node3D" parent="." unique_id=1558640424]
+
+[connection signal="body_entered" from="bullet" to="." method="_on_bullet_body_entered"]
+[connection signal="timeout" from="shoot_timer" to="." method="_on_shoot_timer_timeout"]
