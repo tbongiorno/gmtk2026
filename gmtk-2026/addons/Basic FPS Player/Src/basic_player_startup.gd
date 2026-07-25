@@ -286,7 +286,7 @@ func _on_slide_timer_timeout():
 	
 func hit():
 	print("I've Been Hit")
-	global_position = spawn_point
+	#get_tree().get_child()
 	reset_stats()
 
 func reset_stats():

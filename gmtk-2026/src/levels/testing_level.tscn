@@ -2,11 +2,20 @@
 
 [ext_resource type="Script" uid="uid://255wnv0wwxei" path="res://src/levels/level.gd" id="1_k2ka2"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2ka2"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.75
+
 [sub_resource type="Environment" id="Environment_k2ka2"]
 background_mode = 1
+glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k2ka2"]
 size = Vector3(1, 5.171997, 19.08606)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uy2l2"]
+emission_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uy2l2"]
 size = Vector3(6.807617, 4.773857, 10.897949)
@@ -21,6 +30,7 @@ shots = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.042511, 0, 0)
 use_collision = true
 size = Vector3(24.085022, 1, 20)
+material = SubResource("StandardMaterial3D_k2ka2")
 
 [node name="player_spawn" type="Marker3D" parent="." unique_id=1345861748]
 unique_name_in_owner = true
@@ -35,16 +45,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5765495, 0, 6.03701)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1434834157]
 environment = SubResource("Environment_k2ka2")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=864059403]
-transform = Transform3D(0.37088326, 0.030879052, 0.928166, -0.5974898, 0.7730615, 0.2130304, -0.71095115, -0.63357913, 0.30516547, 0, 3.0407085, 0)
-shadow_enabled = true
-
 [node name="finish_line" type="Area3D" parent="." unique_id=491910040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.591808, 1.2395859, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish_line" unique_id=1113561601]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0859985, 0.030822754)
 shape = SubResource("BoxShape3D_k2ka2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="finish_line" unique_id=1287922772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2373838, -0.012023926)
+size = Vector3(1, 1, 19.071167)
+material = SubResource("StandardMaterial3D_uy2l2")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=637231452]
 transform = Transform3D(1, 0, 0, 0, 0.87068206, -0.4918462, 0, 0.4918462, 0.87068206, -3.0565224, -2.6200953, 14.4987955)

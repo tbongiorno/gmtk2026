@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://mrhhkenwliye" path="res://src/gameplay/turret_enemy.gd" id="1_kf185"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mjck"]
-albedo_color = Color(0.3254902, 0.4, 0.80784315, 1)
+emission_enabled = true
+emission = Color(0, 0, 1, 1)
+emission_energy_multiplier = 10.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1mjck"]
 material = SubResource("StandardMaterial3D_1mjck")

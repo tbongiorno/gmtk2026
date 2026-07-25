@@ -3,7 +3,7 @@ extends Node3D
 var target_position = null
 var bullet_direction = null
 var bullet_moving = false
-const BULLET_SPEED = 7
+const BULLET_SPEED = 15
 
 
 # Called when the node enters the scene tree for the first time.

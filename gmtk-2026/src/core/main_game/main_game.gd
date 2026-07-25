@@ -93,6 +93,9 @@ func _place_enemies_in_level():
 		push_error("Could not load enemy scene: " + ENEMY)
 		return
 	
+	if current_level.get_node("enemy_spawn_points").get_child_count() > 0:
+		pass
+	
 	var enemy_spawns = current_level.get_node("enemy_spawn_points").get_children()
 	
 	for spawn in enemy_spawns:
