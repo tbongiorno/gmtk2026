@@ -26,7 +26,11 @@ func _ready():
 	load_level(TEST_LEVEL)
 
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_pressed("aim"):
+		print("AIMING")
+		Engine.time_scale = 0.1
+	else:
+		Engine.time_scale = 1.0
 
 	
 func _init_player():
@@ -99,8 +103,10 @@ func place_enemies_in_level():
 	
 	var enemy_spawns = current_level.get_node("enemy_spawn_points").get_children()
 	
+	current_level.num_enemies = 0
 	for spawn in enemy_spawns:
 		enemy = enemy_scene.instantiate() as Enemy
+		current_level.num_enemies += 1
 		if enemy == null:
 			push_error("Loaded enemy scene does not extend enemy or DNE: " + ENEMY)
 			return

@@ -12,7 +12,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not time_stopped:
-		time_elapsed += delta
+		if Engine.time_scale == 0.1:
+			time_elapsed += (delta * 10)
+		else:
+			time_elapsed += delta
 		$stopwatch.text = str(time_elapsed).pad_decimals(2)
 	
 	if Input.is_action_just_pressed("pause"):

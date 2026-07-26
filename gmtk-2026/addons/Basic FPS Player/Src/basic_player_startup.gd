@@ -23,11 +23,11 @@ func _enter_tree():
 
 @export_category("Movement")
 @export_subgroup("Settings")
-@export var SPEED := 5.0
+@export var SPEED := 8.0
 @export var ACCEL := 50.0
 @export var IN_AIR_SPEED := 3.0
 @export var IN_AIR_ACCEL := 5.0
-@export var JUMP_VELOCITY := 4.5
+@export var JUMP_VELOCITY := 6
 @export var DASH_VELOCITY := 4.5
 @export var SLIDE_VELOCITY := 3
 @export_subgroup("Head Bob")
@@ -90,6 +90,9 @@ var can_slide : bool = true
 
 var on_ramp : bool = false
 
+var hit_enemy: bool = false
+#var can_shoot : bool = true
+
 var spawn_point : Vector3 = Vector3(0, 0, 0)
 
 func _ready():
@@ -133,15 +136,31 @@ func _process(delta):
 	
 	# Handle Shoot
 	if Input.is_action_just_pressed("shoot") and num_shots != 0:
-		
+
 		print($RayCast3D.get_collision_point())
 		var collider = $RayCast3D.get_collider()
 		if collider != null:
 			print(collider.get_parent().name)
 			if collider.get_parent().name.left(6) == "turret":
 				collider.get_parent().destroy()
+				hit_enemy = true
+				$crosshair.modulate = Color(255, 0, 0)
+				$shoot_timer.start()
+			else:
+				hit_enemy = false
+				$crosshair.modulate = Color(255, 255, 255)
+		else:
+			hit_enemy = false
+			$crosshair.modulate = Color(255, 255, 255)
 		num_shots -= 1
+		$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"
 		print(num_shots)
+	
+	if not hit_enemy:
+		SPEED = 5
+	else:
+		SPEED = 10
+	
 	
 	if !UPDATE_PLAYER_ON_PHYS_STEP:
 		move_player(delta)
@@ -197,6 +216,7 @@ func move_player(delta):
 		is_jumping = true
 		$jump_timer.start()
 		num_jumps -= 1
+		$player_hud/jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
 		print(num_jumps)
 		
 	# Handle Dash
@@ -204,18 +224,19 @@ func move_player(delta):
 		is_dashing = true
 		$dash_timer.start()
 		num_dashes -= 1
+		$player_hud/dashes.text = "[shake][color=blue]" + str(num_dashes) + "[/color][/shake]"
 		print(num_dashes)
 		
 	#Handle Slide
-	if Input.is_action_pressed("slide") and is_on_floor():
+	#if Input.is_action_pressed("slide") and is_on_floor():
 		#if not is_sliding and not on_ramp:
 			#$slide_timer.start(0.5 * global_transform.basis.z.dot(velocity))
 		#if on_ramp:
 			#can_slide = true
-		is_sliding = true
-	else:
-		is_sliding = false
-		can_slide = true
+		#is_sliding = true
+	#else:
+		#is_sliding = false
+		#can_slide = true
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
@@ -226,25 +247,25 @@ func move_player(delta):
 		velocity.z = direction.z * speed
 		#print(velocity)
 	
-	if is_sliding:
-		$Head.position.y = -0.25
+	#if is_sliding:
+		#$Head.position.y = -0.25
 		
-		if can_slide and direction != Vector3(0, 0, 0):
-			if on_ramp:
-				speed = SPEED + 40
-				accel = 30
-				velocity.y = move_toward(velocity.y, direction.y + (speed / 2), accel * delta)
-			else:
-				speed = SPEED + 20
-				accel = 20
-			direction = direction + (transform.basis * Vector3(0, 0, -1.0)).normalized()
-			velocity.x = move_toward(velocity.x, direction.x * speed * 2, accel * delta)
-			velocity.z = move_toward(velocity.z, direction.z * speed * 2, accel * delta)
+		#if can_slide and direction != Vector3(0, 0, 0):
+			#if on_ramp:
+				#speed = SPEED + 40
+				#accel = 30
+				#velocity.y = move_toward(velocity.y, direction.y + (speed / 2), accel * delta)
+			#else:
+				#speed = SPEED + 20
+				#accel = 20
+			#direction = direction + (transform.basis * Vector3(0, 0, -1.0)).normalized()
+			#velocity.x = move_toward(velocity.x, direction.x * speed * 2, accel * delta)
+			#velocity.z = move_toward(velocity.z, direction.z * speed * 2, accel * delta)
 			#print(velocity)
-			if is_jumping:
-				velocity.y = move_toward(velocity.y, direction.y * (speed * 2), accel * delta)
-	else:
-		$Head.position.y = 0
+			#if is_jumping:
+			#	velocity.y = move_toward(velocity.y, direction.y * (speed * 2), accel * delta)
+	#else:
+		#$Head.position.y = 0
 	
 	if is_dashing: # If dash 
 		var horizontal_direction = (transform.basis * Vector3(0, 0, -1.0)).normalized()
@@ -283,7 +304,13 @@ func _on_dash_timer_timeout():
 func _on_slide_timer_timeout():
 	print("End Slide")
 	can_slide = false
-	
+
+
+func _on_shoot_timer_timeout():
+	print("END SHOOT")
+	$crosshair.modulate = Color(255, 255, 255)
+
+
 func hit():
 	print("I've Been Hit")
 	get_parent().get_parent().get_parent().place_enemies_in_level()
@@ -294,3 +321,6 @@ func reset_stats():
 	num_jumps = base_jumps
 	num_dashes = base_dashes
 	num_shots = base_shots
+	$player_hud/jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
+	$player_hud/dashes.text = "[shake][color=blue]" + str(num_dashes) + "[/color][/shake]"
+	$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"

@@ -6,10 +6,12 @@
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.75
+disable_receive_shadows = true
 
 [sub_resource type="Environment" id="Environment_k2ka2"]
 background_mode = 1
 glow_enabled = true
+glow_intensity = 5.65
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k2ka2"]
 size = Vector3(1, 5.171997, 19.08606)
@@ -42,8 +44,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0980229, 0)
 [node name="Marker3D" type="Marker3D" parent="enemy_spawn_points" unique_id=1755181665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5765495, 0, 6.03701)
 
+[node name="Marker3D2" type="Marker3D" parent="enemy_spawn_points" unique_id=167015245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5765495, 0, -0.7915182)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1434834157]
 environment = SubResource("Environment_k2ka2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2079172316]
+transform = Transform3D(0.37088326, 0.030879064, 0.928166, -0.5974898, 0.7730615, 0.21303037, -0.71095115, -0.63357913, 0.3051655, 0, 3.0407085, 0)
+shadow_enabled = true
 
 [node name="finish_line" type="Area3D" parent="." unique_id=491910040]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.591808, 1.2395859, 0)
