@@ -28,3 +28,9 @@ func _on_finish_line_body_entered(body):
 	if body.name == "player" and num_enemies == 0:
 		print("END LEVEL")
 		get_parent().get_parent().get_parent().load_level(LEVEL_1)
+
+
+func _on_die_area_body_entered(body):
+	if body.name == "player":
+		print("Exited below")
+		body.hit()

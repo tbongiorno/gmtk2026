@@ -45,9 +45,9 @@ func _init_player():
 
 func load_level(level_scene: String) -> void:
 	print(level_scene)
-	_deferred_load_level.call_deferred(level_scene)
+	deferred_load_level.call_deferred(level_scene)
 
-func _deferred_load_level(level_scene_uid: String) -> void:
+func deferred_load_level(level_scene_uid: String) -> void:
 	if current_level != null:
 		current_level.queue_free()
 		current_level = null
@@ -68,10 +68,10 @@ func _deferred_load_level(level_scene_uid: String) -> void:
 	level_root.add_child(current_level)
 	
 	await get_tree().process_frame
-	_place_player_at_level_spawn()
-	_place_enemies_in_level()
+	place_player_at_level_spawn()
+	place_enemies_in_level()
 
-func _place_player_at_level_spawn():
+func place_player_at_level_spawn():
 	if player == null:
 		push_error("Cannot place player in level because it is null")
 		return
@@ -87,14 +87,15 @@ func _place_player_at_level_spawn():
 	player.base_shots = current_level.shots
 	player.reset_stats()
 
-func _place_enemies_in_level():
+func place_enemies_in_level():
 	var enemy_scene : PackedScene = ResourceLoader.load(ENEMY) as PackedScene
 	if enemy_scene == null:
 		push_error("Could not load enemy scene: " + ENEMY)
 		return
 	
-	if current_level.get_node("enemy_spawn_points").get_child_count() > 0:
-		pass
+	for entity in entity_root.get_children():
+		if entity.name.left(6) == "turret":
+			entity.queue_free()
 	
 	var enemy_spawns = current_level.get_node("enemy_spawn_points").get_children()
 	

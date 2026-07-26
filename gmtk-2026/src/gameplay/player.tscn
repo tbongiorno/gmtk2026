@@ -44,6 +44,34 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="stuff" type="RichTextLabel" parent="player_hud" unique_id=1689247532]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 37.0
+offset_right = 521.0
+offset_bottom = 147.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[wave][color=\"green\"]Jumps[/color][/wave]   [shake][color=\"blue\"]Dashes[/color] [/shake]   [pulse][color=\"red\"]Shots[/color][/pulse]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="jumps" type="RichTextLabel" parent="player_hud" unique_id=1481829126]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="dashes" type="RichTextLabel" parent="player_hud" unique_id=1210612711]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="shots" type="RichTextLabel" parent="player_hud" unique_id=19198154]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="timeout" from="jump_timer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="slide_timer" to="." method="_on_slide_timer_timeout"]
