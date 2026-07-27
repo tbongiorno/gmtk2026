@@ -24,7 +24,6 @@ func _on_shoot_timer_timeout():
 	var new_bullet = bullet.instantiate()
 	bullets.add_child(new_bullet)
 	new_bullet.init_bullet(player)
-	print("Fired")
 
 
 func destroy():

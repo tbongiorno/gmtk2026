@@ -90,7 +90,7 @@ var can_slide : bool = true
 
 var on_ramp : bool = false
 
-var hit_enemy: bool = false
+var hit_enemy: bool = true
 #var can_shoot : bool = true
 
 var spawn_point : Vector3 = Vector3(0, 0, 0)
@@ -133,6 +133,19 @@ func _process(delta):
 	
 	$RayCast3D.rotation.x = rotation_target_head
 	$RayCast3D.position = head_start_pos
+	
+	# Handle Reset
+	if Input.is_action_just_pressed("reset"):
+		hit()
+	
+	
+	# Handle Aim
+	if Input.is_action_pressed("aim"):
+		print("AIMING")
+		Engine.time_scale = 0.1
+	else:
+		Engine.time_scale = 1.0
+	
 	
 	# Handle Shoot
 	if Input.is_action_just_pressed("shoot") and num_shots != 0:
@@ -316,6 +329,7 @@ func hit():
 	print("I've Been Hit")
 	get_parent().get_parent().get_parent().place_enemies_in_level()
 	global_position = spawn_point
+	no_move()
 	reset_stats()
 
 func reset_stats():
@@ -325,3 +339,9 @@ func reset_stats():
 	$player_hud/jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
 	$player_hud/dashes.text = "[shake][color=blue]" + str(num_dashes) + "[/color][/shake]"
 	$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"
+
+func no_move():
+	velocity = Vector3(0, 0, 0)
+	is_jumping = false
+	is_dashing = false
+	move_and_slide()

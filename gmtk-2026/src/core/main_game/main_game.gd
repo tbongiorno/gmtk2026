@@ -27,11 +27,7 @@ func _ready():
 	load_level(LEVEL_1)
 
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("aim"):
-		print("AIMING")
-		Engine.time_scale = 0.1
-	else:
-		Engine.time_scale = 1.0
+	pass
 
 	
 func _init_player():
@@ -86,6 +82,7 @@ func place_player_at_level_spawn():
 	
 	player.global_position = current_level.get_default_player_spawn()
 	player.spawn_point = player.global_position
+	player.no_move()
 	
 	player.base_jumps = current_level.jumps
 	player.base_dashes = current_level.dashes

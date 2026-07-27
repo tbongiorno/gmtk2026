@@ -26,24 +26,26 @@ glow_enabled = true
 glow_intensity = 5.65
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gg3cy"]
-size = Vector3(1.8608398, 6.4526978, 19.08606)
+size = Vector3(1.8608398, 7.6063385, 7.1164017)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6koly"]
+albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6koly"]
 size = Vector3(85.97391, 1, 84.15358)
 
 [node name="level_3" type="Node3D" unique_id=413750415]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_51dij")
 jumps = 2
 dashes = 2
 shots = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=197259800]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.665841, 3.9896016, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 4, 0)
 use_collision = true
-size = Vector3(6.1653767, 1, 6.941162)
+size = Vector3(6, 1, 7)
 material = SubResource("StandardMaterial3D_3givo")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1043846566]
@@ -55,7 +57,7 @@ material = SubResource("StandardMaterial3D_3givo")
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1230733665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.974075, 14.107322, -0.0029296875)
 use_collision = true
-size = Vector3(5.503937, 3.5483398, 6.8945313)
+size = Vector3(5.5, 3.548, 6.895)
 material = SubResource("StandardMaterial3D_51dij")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=34584228]
@@ -65,32 +67,31 @@ size = Vector3(1, 27.366, 6)
 material = SubResource("StandardMaterial3D_gg3cy")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=257598616]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.767, 9.018, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 9, -10)
 use_collision = true
 size = Vector3(3, 1, 3)
 material = SubResource("StandardMaterial3D_51dij")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=390653489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.767, 9.018, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 9, 10)
 use_collision = true
 size = Vector3(3, 1, 3)
 material = SubResource("StandardMaterial3D_51dij")
 
 [node name="player_spawn" type="Marker3D" parent="." unique_id=1832506281]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.006134, 17.142618, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 17, 0)
 
 [node name="enemy_spawn_points" type="Node3D" parent="." unique_id=398232974]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0980229, 0)
 
 [node name="Marker3D" type="Marker3D" parent="enemy_spawn_points" unique_id=1814183064]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.739174, 9.639652, 9.952066)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10.5, 10)
 
 [node name="Marker3D2" type="Marker3D" parent="enemy_spawn_points" unique_id=1418812441]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.77051, 9.2435055, -10.030467)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 10.5, -10)
 
 [node name="Marker3D3" type="Marker3D" parent="enemy_spawn_points" unique_id=899276256]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.593, 3.825992, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 5.5, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1067593174]
 environment = SubResource("Environment_51dij")
@@ -100,14 +101,13 @@ transform = Transform3D(0.37088326, 0.030879064, 0.928166, -0.5974898, 0.7730615
 shadow_enabled = true
 
 [node name="finish_line" type="Area3D" parent="." unique_id=1937092215]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.174713, 1.2395859, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.33186, 5.367742, 1.8171465e-07)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish_line" unique_id=1320380976]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8235683, 6.5873556, 0.030822754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4185104, -0.055782266)
 shape = SubResource("BoxShape3D_gg3cy")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="finish_line" unique_id=202107563]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.268545, 4.1531415, 0)
 size = Vector3(1, 1, 6.5)
 material = SubResource("StandardMaterial3D_6koly")
 

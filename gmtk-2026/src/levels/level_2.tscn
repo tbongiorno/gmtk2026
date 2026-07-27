@@ -26,48 +26,50 @@ glow_enabled = true
 glow_intensity = 5.65
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_flios"]
-size = Vector3(1.8608398, 6.4526978, 19.08606)
+size = Vector3(1.8608398, 6.4526978, 6.9993973)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flios"]
+albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ms1y2"]
 size = Vector3(56.950333, 1, 53.942444)
 
 [node name="level_2" type="Node3D" unique_id=1259229615]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 script = ExtResource("1_jr4dd")
 jumps = 3
 dashes = 2
 shots = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1975504078]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.665841, 3.9896016, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0)
 use_collision = true
-size = Vector3(6.1653767, 1, 6.941162)
+size = Vector3(6, 1, 7)
 material = SubResource("StandardMaterial3D_hclg5")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=648713853]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.17059, 2.8211794, -0.0029296875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 3, 0)
 use_collision = true
-size = Vector3(5.503937, 3.5483398, 6.8945313)
+size = Vector3(5, 3.5, 7)
 material = SubResource("StandardMaterial3D_jr4dd")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=2096725123]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.360603, 4.0742188, -0.0029296875)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 4, 0)
 use_collision = true
-size = Vector3(5.503937, 3.5483398, 6.8945313)
+size = Vector3(5.504, 3.5, 7)
 material = SubResource("StandardMaterial3D_jr4dd")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=824422030]
-transform = Transform3D(0.5089963, -0.8607687, 0, 0.8607687, 0.5089963, 0, 0, 0, 1, -13.843949, 3.6287794, 0.1635766)
+transform = Transform3D(0.5089963, -0.8607687, 0, 0.8607687, 0.5089963, 0, 0, 0, 1, -14.49624, 3.5299973, 0.16357657)
 use_collision = true
-size = Vector3(1, 7.0300293, 3.8515625)
+size = Vector3(1, 7, 3)
 material = SubResource("StandardMaterial3D_j6mmr")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=448569420]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.081318, 4.1732492, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4.25, 0)
 use_collision = true
-size = Vector3(6.778536, 1, 6.941162)
+size = Vector3(7, 1, 7)
 material = SubResource("StandardMaterial3D_hclg5")
 
 [node name="player_spawn" type="Marker3D" parent="." unique_id=1711934637]
@@ -75,16 +77,15 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.576637, 5.543029, 0)
 
 [node name="enemy_spawn_points" type="Node3D" parent="." unique_id=88241591]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0980229, 0)
 
 [node name="Marker3D" type="Marker3D" parent="enemy_spawn_points" unique_id=1450326203]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.32388, 5.0752296, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 6.75, 0)
 
 [node name="Marker3D2" type="Marker3D" parent="enemy_spawn_points" unique_id=1210199187]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.689, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5.75, 2)
 
 [node name="Marker3D3" type="Marker3D" parent="enemy_spawn_points" unique_id=423347399]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 3.689, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5.75, -2)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1862934299]
 environment = SubResource("Environment_j6mmr")
@@ -94,14 +95,14 @@ transform = Transform3D(0.37088326, 0.030879052, 0.928166, -0.5974898, 0.7730615
 shadow_enabled = true
 
 [node name="finish_line" type="Area3D" parent="." unique_id=872930970]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.32244, 5.247277, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4404435, 5.0089936, -8.226468e-08)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish_line" unique_id=663287507]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6249447, 1.4456482, 0.030822754)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.030301163)
 shape = SubResource("BoxShape3D_flios")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="finish_line" unique_id=890652577]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1120005, -1.2194552, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 size = Vector3(1, 1, 6.5)
 material = SubResource("StandardMaterial3D_flios")
 
