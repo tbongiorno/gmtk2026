@@ -28,3 +28,7 @@ func start_or_stop_stopwatch():
 
 func reset_stopwatch():
 	time_elapsed = 0.0
+	
+func get_time() -> float:
+	time_stopped = true
+	return time_elapsed

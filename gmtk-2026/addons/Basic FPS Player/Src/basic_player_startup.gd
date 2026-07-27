@@ -309,6 +309,7 @@ func _on_slide_timer_timeout():
 func _on_shoot_timer_timeout():
 	print("END SHOOT")
 	$crosshair.modulate = Color(255, 255, 255)
+	SPEED = 10
 
 
 func hit():

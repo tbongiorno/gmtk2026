@@ -46,6 +46,7 @@ func _on_finish_line_body_entered(body):
 			get_parent().get_parent().get_parent().load_level(LEVEL_6)
 		else:
 			print("YOU WIN!")
+			get_parent().get_parent().get_parent().initialize_end()
 
 
 func _on_die_area_body_entered(body):

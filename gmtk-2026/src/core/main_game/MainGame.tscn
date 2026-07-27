@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b04e6hsaqfmp1" path="res://src/core/main_game/main_game.gd" id="1_l3iix"]
 [ext_resource type="PackedScene" uid="uid://gm6asm05vlw7" path="res://src/ui/hud_node.tscn" id="2_o4umv"]
+[ext_resource type="PackedScene" uid="uid://muenbqeku07j" path="res://src/ui/end_screen.tscn" id="4_57sy6"]
 
 [node name="MainGame" type="Node" unique_id=1670218661]
 process_mode = 3
@@ -33,6 +34,10 @@ offset_right = 1152.0
 offset_bottom = 648.0
 
 [node name="hud_node" parent="HudLayer/HudRoot" unique_id=208336938 instance=ExtResource("2_o4umv")]
+layout_mode = 1
+
+[node name="end_screen" parent="HudLayer/HudRoot" unique_id=1127233741 instance=ExtResource("4_57sy6")]
+visible = false
 layout_mode = 1
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=357698129]

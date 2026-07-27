@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://muenbqeku07j"]
+
+[ext_resource type="Script" uid="uid://wu1ejsegmcp8" path="res://src/ui/end_screen.gd" id="1_siwbk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_siwbk"]
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[node name="end_screen" type="Control" unique_id=1127233741]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_siwbk")
+
+[node name="back_to_start" type="Button" parent="." unique_id=153858970]
+layout_mode = 0
+offset_left = 523.0
+offset_top = 383.0
+offset_right = 634.0
+offset_bottom = 421.0
+text = "Back to Start"
+
+[node name="score" type="Label" parent="." unique_id=584706978]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 152.0
+offset_right = 791.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 40
+text = "Your Score is
+50"
+label_settings = SubResource("LabelSettings_siwbk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fade" type="ColorRect" parent="." unique_id=974839165]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="back_to_start" to="." method="_on_back_to_start_pressed"]

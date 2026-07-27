@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="gmtk2026"
-run/main_scene="uid://6i55fu3ajr3g"
+run/main_scene="uid://c1j53y6nfjgiq"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[autoload]
+
+SilentWolf="*uid://cj1rie86lpkre"
 
 [editor_plugins]
 
