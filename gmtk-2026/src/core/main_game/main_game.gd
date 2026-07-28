@@ -3,6 +3,7 @@ extends Node
 
 
 # FUTURE (main menu): Load test level for prototype
+const TEST_LEVEL: String = "uid://cx8wx8n140b6p"
 const LEVEL_1 : String = "uid://334sld36crvk"
 const PLAYER : String = "uid://bfdvy6ycjo3p6"
 const ENEMY : String = "uid://dahkw2wfumb0y"
@@ -24,7 +25,7 @@ var enemy : Enemy = null
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_init_player()
-	load_level(LEVEL_1)
+	load_level(TEST_LEVEL)
 
 func _process(delta: float) -> void:
 	pass

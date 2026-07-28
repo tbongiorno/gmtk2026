@@ -10,6 +10,8 @@
 
 [node name="player" type="CharacterBody3D" unique_id=2107680255]
 script = ExtResource("1_4j6do")
+SPEED = 8.0
+ACCEL = 50.0
 metadata/_custom_type_script = "uid://dae1t8ny86kln"
 
 [node name="Head" parent="." unique_id=323156219 instance=ExtResource("2_oyjl1")]
@@ -36,6 +38,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="slide_timer" type="Timer" parent="." unique_id=1443208438]
+wait_time = 0.5
 one_shot = true
 
 [node name="shoot_timer" type="Timer" parent="." unique_id=15264515]

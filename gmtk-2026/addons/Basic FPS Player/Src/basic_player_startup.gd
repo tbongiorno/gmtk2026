@@ -23,8 +23,8 @@ func _enter_tree():
 
 @export_category("Movement")
 @export_subgroup("Settings")
-@export var SPEED := 8.0
-@export var ACCEL := 50.0
+@export var SPEED := 6.0
+@export var ACCEL := 40.0
 @export var IN_AIR_SPEED := 3.0
 @export var IN_AIR_ACCEL := 5.0
 @export var JUMP_VELOCITY := 6
@@ -85,8 +85,9 @@ var num_shots : int = 1
 
 var is_jumping : bool = false
 var is_dashing : bool = false
-var is_sliding : bool = false
-var can_slide : bool = true
+
+var is_crouching: bool = false
+var is_slide_jumping : bool = false
 
 var on_ramp : bool = false
 
@@ -150,10 +151,9 @@ func _process(delta):
 	# Handle Shoot
 	if Input.is_action_just_pressed("shoot") and num_shots != 0:
 
-		print($RayCast3D.get_collision_point())
+		#print($RayCast3D.get_collision_point())
 		var collider = $RayCast3D.get_collider()
 		if collider != null:
-			print(collider.get_parent().name)
 			if collider.get_parent().name.left(6) == "turret":
 				collider.get_parent().destroy()
 				hit_enemy = true
@@ -167,7 +167,6 @@ func _process(delta):
 			$crosshair.modulate = Color(255, 255, 255)
 		num_shots -= 1
 		$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"
-		print(num_shots)
 	
 	if not hit_enemy:
 		SPEED = 5
@@ -225,7 +224,10 @@ func move_player(delta):
 	
 	# Handle Jump.
 	if Input.is_action_just_pressed(KEY_BIND_JUMP) and is_on_floor() and num_jumps > 0:
-		velocity.y = JUMP_VELOCITY
+		if is_crouching and on_ramp:
+			velocity.y = JUMP_VELOCITY + 2
+		else:
+			velocity.y = JUMP_VELOCITY
 		is_jumping = true
 		$jump_timer.start()
 		num_jumps -= 1
@@ -240,30 +242,50 @@ func move_player(delta):
 		$player_hud/dashes.text = "[shake][color=blue]" + str(num_dashes) + "[/color][/shake]"
 		print(num_dashes)
 		
-	#Handle Slide
-	#if Input.is_action_pressed("slide") and is_on_floor():
-		#if not is_sliding and not on_ramp:
-			#$slide_timer.start(0.5 * global_transform.basis.z.dot(velocity))
-		#if on_ramp:
-			#can_slide = true
-		#is_sliding = true
+	#Handle Crouch
+	if Input.is_action_pressed("crouch") and is_on_floor():
+		$Head.position.y = -0.25
+		is_crouching = true
+	else:
+		$Head.position.y = 0
+		is_crouching = false
+
+	#if not is_sliding and not on_ramp:
+	#		$slide_timer.start(0.5 * global_transform.basis.z.dot(velocity))
+	#	if on_ramp:
+	#		can_slide = true
+	#	is_sliding = true
 	#else:
-		#is_sliding = false
-		#can_slide = true
+	#	is_sliding = false
+	#	can_slide = true
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if direction and not is_jumping and not is_sliding: # If there's a direction with no dash / jump
+	if direction and not is_jumping and not is_crouching: # If there's a direction with no dash / jump
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		#print(velocity)
 	
-	#if is_sliding:
-		#$Head.position.y = -0.25
+	if is_crouching:
+		if on_ramp:
+			speed = SPEED + 10
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+			
+			if is_jumping:
+				is_slide_jumping = true
+				$slide_timer.start()
+			else:
+				velocity.y = - get_floor_angle() * speed
 		
-		#if can_slide and direction != Vector3(0, 0, 0):
+	
+	if is_slide_jumping:
+		speed = SPEED + 20
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+		
+		#if is_sliding and direction != Vector3(0, 0, 0):
 			#if on_ramp:
 				#speed = SPEED + 40
 				#accel = 30
@@ -274,18 +296,16 @@ func move_player(delta):
 			#direction = direction + (transform.basis * Vector3(0, 0, -1.0)).normalized()
 			#velocity.x = move_toward(velocity.x, direction.x * speed * 2, accel * delta)
 			#velocity.z = move_toward(velocity.z, direction.z * speed * 2, accel * delta)
-			#print(velocity)
+			##print(velocity)
 			#if is_jumping:
-			#	velocity.y = move_toward(velocity.y, direction.y * (speed * 2), accel * delta)
-	#else:
-		#$Head.position.y = 0
+				#velocity.y = move_toward(velocity.y, direction.y * (speed * 2), accel * delta)
 	
 	if is_dashing: # If dash 
 		var horizontal_direction = (transform.basis * Vector3(0, 0, -1.0)).normalized()
 		velocity.x = (horizontal_direction.x * speed) + ((speed / 2) * direction.x)
 		velocity.z = (horizontal_direction.z * speed) + ((speed / 2) * direction.z)
 	
-	if not is_dashing and not is_sliding: # If not dashing 
+	if not is_dashing and not is_crouching: # If not dashing 
 		velocity.x = move_toward(velocity.x, direction.x * speed, accel * delta)
 		velocity.z = move_toward(velocity.z, direction.z * speed, accel * delta)
 
@@ -316,7 +336,7 @@ func _on_dash_timer_timeout():
 
 func _on_slide_timer_timeout():
 	print("End Slide")
-	can_slide = false
+	is_slide_jumping = false
 
 
 func _on_shoot_timer_timeout():
