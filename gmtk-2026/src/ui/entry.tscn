@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cugsnjfy4omos"]
+
+[ext_resource type="Script" uid="uid://bpwkibd585pc5" path="res://src/ui/entry.gd" id="1_kokd7"]
+
+[node name="entry" type="Label" unique_id=828004583]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "{pos}. {username} scored: {score} points"
+script = ExtResource("1_kokd7")

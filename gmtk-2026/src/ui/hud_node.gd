@@ -25,6 +25,7 @@ func _process(delta):
 
 func start_or_stop_stopwatch():
 	time_stopped = not time_stopped
+	$pause.visible = not $pause.visible
 
 func reset_stopwatch():
 	time_elapsed = 0.0

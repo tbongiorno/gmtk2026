@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cyrq7d2hynvrk"]
+
+[ext_resource type="Script" uid="uid://do6axuxugv6bn" path="res://src/ui/leaderboard.gd" id="1_2ygcv"]
+
+[node name="Leaderboard" type="Node2D" unique_id=2031682556]
+script = ExtResource("1_2ygcv")
+
+[node name="UI" type="Control" parent="." unique_id=1130309292]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="UI" unique_id=415499565]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=670015730]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=835659006]
+layout_mode = 2
+
+[node name="LeaderboardName" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=794763354]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=190323471]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1405893695]
+layout_mode = 2
+
+[node name="Entries" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/ScrollContainer" unique_id=543204758]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Username" type="TextEdit" parent="UI/MarginContainer/VBoxContainer" unique_id=881553776]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Submit" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=17236725]
+layout_mode = 2
+
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Submit" to="." method="_on_submit_pressed"]

@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d03c4i74531y7" path="res://src/ui/hud_node.gd" id="1_6sh2a"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_6sh2a"]
+font_size = 40
+
 [node name="hud_node" type="Control" unique_id=208336938]
 layout_mode = 3
 anchors_preset = 15
@@ -17,3 +20,13 @@ offset_left = 428.0
 offset_top = 50.0
 offset_right = 724.0
 offset_bottom = 125.0
+
+[node name="pause" type="Label" parent="." unique_id=732380239]
+visible = false
+layout_mode = 0
+offset_left = 500.0
+offset_top = 50.0
+offset_right = 656.0
+offset_bottom = 105.0
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_6sh2a")

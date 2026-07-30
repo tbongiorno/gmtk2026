@@ -110,10 +110,12 @@ func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
 	
-	if get_floor_angle() > 0.0 and get_floor_angle() < 1.0:
-		on_ramp = true
-	else:
+	#print(get_floor_angle())
+	#print(get_floor_normal())
+	if is_on_floor() and get_floor_normal() == Vector3(0, 0, 0):
 		on_ramp = false
+	else:
+		on_ramp = true
 	
 	# Increment player tick, used in head bob motion
 	tick += 1
@@ -225,7 +227,7 @@ func move_player(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed(KEY_BIND_JUMP) and is_on_floor() and num_jumps > 0:
 		if is_crouching and on_ramp:
-			velocity.y = JUMP_VELOCITY + 2
+			velocity.y = JUMP_VELOCITY + 4
 		else:
 			velocity.y = JUMP_VELOCITY
 		is_jumping = true
@@ -263,7 +265,7 @@ func move_player(delta):
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if direction and not is_jumping and not is_crouching: # If there's a direction with no dash / jump
+	if direction and not is_jumping: # If there's a direction with no dash / jump
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 	
@@ -278,37 +280,21 @@ func move_player(delta):
 				$slide_timer.start()
 			else:
 				velocity.y = - get_floor_angle() * speed
-		
+	
 	
 	if is_slide_jumping:
 		speed = SPEED + 20
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
-		
-		#if is_sliding and direction != Vector3(0, 0, 0):
-			#if on_ramp:
-				#speed = SPEED + 40
-				#accel = 30
-				#velocity.y = move_toward(velocity.y, direction.y + (speed / 2), accel * delta)
-			#else:
-				#speed = SPEED + 20
-				#accel = 20
-			#direction = direction + (transform.basis * Vector3(0, 0, -1.0)).normalized()
-			#velocity.x = move_toward(velocity.x, direction.x * speed * 2, accel * delta)
-			#velocity.z = move_toward(velocity.z, direction.z * speed * 2, accel * delta)
-			##print(velocity)
-			#if is_jumping:
-				#velocity.y = move_toward(velocity.y, direction.y * (speed * 2), accel * delta)
 	
 	if is_dashing: # If dash 
 		var horizontal_direction = (transform.basis * Vector3(0, 0, -1.0)).normalized()
 		velocity.x = (horizontal_direction.x * speed) + ((speed / 2) * direction.x)
 		velocity.z = (horizontal_direction.z * speed) + ((speed / 2) * direction.z)
-	
-	if not is_dashing and not is_crouching: # If not dashing 
+	else: # If not dashing 
 		velocity.x = move_toward(velocity.x, direction.x * speed, accel * delta)
 		velocity.z = move_toward(velocity.z, direction.z * speed, accel * delta)
-
+	
 	move_and_slide()
 
 func head_bob_motion():

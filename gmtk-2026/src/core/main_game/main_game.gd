@@ -27,7 +27,7 @@ func _ready():
 	_init_player()
 	load_level(TEST_LEVEL)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 	
@@ -129,13 +129,3 @@ func initialize_end():
 	end_screen.get_node("score").text = "Your Score is
 " + str("%.2f" % final_time)
 	
-	
-	#
-	##Save Score
-	#hud.start_or_stop_stopwatch()
-	#var sw_result: Dictionary = await SilentWolf.Scores.save_score("example", hud.time_elapsed).sw_save_score_complete
-	#print("Score persisted successfully: " + str(sw_result.score_id))
-	#
-	##List of Scores
-	#var sw_results: Dictionary = await SilentWolf.Scores.get_scores(20).sw_get_scores_complete
-	#print("Scores: " + str(sw_results.scores))

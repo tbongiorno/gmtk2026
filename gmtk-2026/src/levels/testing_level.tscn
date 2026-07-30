@@ -29,9 +29,9 @@ dashes = 5
 shots = 5
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1923642110]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.042511, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 use_collision = true
-size = Vector3(24.085022, 1, 20)
+size = Vector3(24, 1, 20)
 material = SubResource("StandardMaterial3D_k2ka2")
 
 [node name="player_spawn" type="Marker3D" parent="." unique_id=1345861748]
@@ -82,6 +82,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0100105, -9.148645, 49.827
 use_collision = true
 size = Vector3(7.316345, 1, 15.680664)
 
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1447303942]
+transform = Transform3D(-1, -4.299856e-08, -7.611744e-08, 0, 0.87068206, -0.49184617, 8.742278e-08, -0.4918462, -0.870682, -3.7724476, -6.9163795, -22.075882)
+use_collision = true
+size = Vector3(6.9647217, 1, 28.363098)
+
+[node name="ramp_area" type="Area3D" parent="CSGBox3D4" unique_id=304501790]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBox3D4/ramp_area" unique_id=272982130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.060058594, 1.8869314, 0.00061035156)
+shape = SubResource("BoxShape3D_uy2l2")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=4647295]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.2940865, -9.148645, -47.72502)
+use_collision = true
+size = Vector3(7.316345, 1, 15.680664)
+
 [connection signal="body_entered" from="finish_line" to="." method="_on_finish_line_body_entered"]
 [connection signal="body_entered" from="CSGBox3D2/ramp_area" to="." method="_on_ramp_area_body_entered"]
 [connection signal="body_exited" from="CSGBox3D2/ramp_area" to="." method="_on_ramp_area_body_exited"]
+[connection signal="body_entered" from="CSGBox3D4/ramp_area" to="." method="_on_ramp_area_body_entered"]
+[connection signal="body_exited" from="CSGBox3D4/ramp_area" to="." method="_on_ramp_area_body_exited"]
