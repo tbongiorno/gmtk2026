@@ -7,10 +7,10 @@ func _set_pos(pos: int) -> void:
 func _set_username(username: String) -> void:
   text = text.replace("{username}", username)
 
-func _set_score(score: int) -> void:
-  text = text.replace("{score}", str(int(score)))
+func _set_score(score: float) -> void:
+  text = text.replace("{score}", str(snapped(float(score), 0.01)))
 
-func set_data(pos: int, username: String, score: int) -> void:
+func set_data(pos: int, username: String, score: float) -> void:
   _set_pos(pos)
   _set_username(username)
   _set_score(score)

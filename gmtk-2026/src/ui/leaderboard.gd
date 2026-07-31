@@ -1,9 +1,9 @@
 extends Node2D
 
 
-var entry_scene = preload("res://addons/talo/samples/leaderboards/entry.tscn") # update this to a path that matches your entry scene
+var entry_scene = preload("res://src/ui/entry.tscn") # update this to a path that matches your entry scene
 
-@export var leaderboard_internal_name: String
+@export var leaderboard_internal_name: String = "speed-shooter-leaderboard"
 
 @onready var entries_container: VBoxContainer = %Entries
 @onready var username: TextEdit = %Username
@@ -46,7 +46,7 @@ func _load_entries() -> void:
 func _on_submit_pressed() -> void:
 	await Talo.players.identify("username", username.text)
 
-	var score := RandomNumberGenerator.new().randi_range(0, 100)
+	var score := RandomNumberGenerator.new().randf_range(0, 100)
 	var res := await Talo.leaderboards.add_entry(leaderboard_internal_name, score)
 
 	_build_entries()

@@ -31,7 +31,7 @@ offset_right = 791.0
 offset_bottom = 294.0
 theme_override_font_sizes/font_size = 40
 text = "Your Score is
-50"
+"
 label_settings = SubResource("LabelSettings_siwbk")
 horizontal_alignment = 1
 vertical_alignment = 1

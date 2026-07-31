@@ -1,49 +1,99 @@
 [gd_scene format=3 uid="uid://cyrq7d2hynvrk"]
 
 [ext_resource type="Script" uid="uid://do6axuxugv6bn" path="res://src/ui/leaderboard.gd" id="1_2ygcv"]
+[ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="2_70y0e"]
 
 [node name="Leaderboard" type="Node2D" unique_id=2031682556]
 script = ExtResource("1_2ygcv")
 
-[node name="UI" type="Control" parent="." unique_id=1130309292]
+[node name="UI" type="Control" parent="." unique_id=2032215900]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 647.0
 
-[node name="Background" type="ColorRect" parent="UI" unique_id=415499565]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Background" type="ColorRect" parent="UI" unique_id=1936451294]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.121569, 0.160784, 0.215686, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=670015730]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=1994917743]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=835659006]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer" unique_id=46080519]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
 
-[node name="LeaderboardName" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=794763354]
+[node name="LeaderboardName" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=380155702]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_70y0e")
+text = "Global Leaderboard"
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="InfoLabel" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=190323471]
+[node name="InfoLabel" type="Label" parent="UI/MarginContainer/VBoxContainer" unique_id=458063176]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
+size_flags_horizontal = 4
+text = "Rank            Name            Time(Min:Sec)"
+horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1405893695]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1333319539]
+custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="Entries" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/ScrollContainer" unique_id=543204758]
+[node name="Entries" type="VBoxContainer" parent="UI/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1942611538]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 32)
 layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
 
-[node name="Username" type="TextEdit" parent="UI/MarginContainer/VBoxContainer" unique_id=881553776]
+[node name="Username" type="TextEdit" parent="UI/MarginContainer/VBoxContainer" unique_id=1866296406]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_70y0e")
+placeholder_text = "Username"
 
-[node name="Submit" type="Button" parent="UI/MarginContainer/VBoxContainer" unique_id=17236725]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=832835554]
 layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
 
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Submit" to="." method="_on_submit_pressed"]
+[node name="Submit" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=880692585]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_70y0e")
+text = "Add entry"
+
+[node name="Home" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=674911197]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_70y0e")
+text = "Home"
+
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/HBoxContainer/Submit" to="." method="_on_submit_pressed"]
