@@ -8,7 +8,14 @@ var entry_scene = preload("res://src/ui/entry.tscn") # update this to a path tha
 @onready var entries_container: VBoxContainer = %Entries
 @onready var username: TextEdit = %Username
 
+@onready var time = time_manager
+
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	%time_label.text = "Your Time is " + str(int(time.curr_time_elapsed() / 60)) + ":" + str(int(time.curr_time_elapsed()) % 60)
+	
+	if not time.is_time_stopped():
+		time.start_or_stop_time()
 	await _load_entries()
 
 func _create_entry(entry: TaloLeaderboardEntry) -> void:
@@ -46,7 +53,14 @@ func _load_entries() -> void:
 func _on_submit_pressed() -> void:
 	await Talo.players.identify("username", username.text)
 
-	var score := RandomNumberGenerator.new().randf_range(0, 100)
+	var score : float = time.curr_time_elapsed()
 	var res := await Talo.leaderboards.add_entry(leaderboard_internal_name, score)
 
 	_build_entries()
+	$UI/MarginContainer/VBoxContainer/Buttons/Submit.disabled = true
+	
+
+
+func _on_home_pressed():
+	time.reset()
+	get_tree().change_scene_to_file("res://src/ui/start_screen.tscn")

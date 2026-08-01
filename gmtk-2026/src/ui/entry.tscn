@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://cugsnjfy4omos"]
 
 [ext_resource type="Script" uid="uid://bpwkibd585pc5" path="res://src/ui/entry.gd" id="1_kokd7"]
+[ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="1_lpwcx"]
 
-[node name="entry" type="Label" unique_id=828004583]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "{pos}. {username} scored: {score} points"
+[node name="entry" type="RichTextLabel" unique_id=1173216798]
+custom_minimum_size = Vector2(388, 32)
+offset_right = 388.0
+offset_bottom = 40.0
+theme = ExtResource("1_lpwcx")
+bbcode_enabled = true
+text = "[fill]{pos}. {username}    {min}:{sec}[/fill]"
 script = ExtResource("1_kokd7")

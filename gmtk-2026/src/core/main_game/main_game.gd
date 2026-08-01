@@ -22,10 +22,14 @@ var enemy : Enemy = null
 @onready var transition_layer = $TransitionLayer
 @onready var debug_layer = $DebugLayer
 
+# Autostarts
+@onready var time = time_manager
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_init_player()
-	load_level(TEST_LEVEL)
+	load_level(LEVEL_1)
+	time.start_or_stop_time()
 
 func _process(_delta: float) -> void:
 	pass
@@ -116,7 +120,7 @@ func place_enemies_in_level():
 
 
 func initialize_end():
-	var final_time = hud_layer.get_node("HudRoot/hud_node").get_time()
+	var final_time = time.curr_time_elapsed()
 	
 	level_root.remove_child(current_level)
 	entity_root.remove_child(player)

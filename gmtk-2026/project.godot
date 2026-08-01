@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 SilentWolf="*uid://cj1rie86lpkre"
 Talo="*uid://bpmdn8oc34pg7"
+time_manager="*uid://dlgro26k2ubuh"
 
 [editor_plugins]
 

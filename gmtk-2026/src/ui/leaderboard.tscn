@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://do6axuxugv6bn" path="res://src/ui/leaderboard.gd" id="1_2ygcv"]
 [ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="2_70y0e"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_70y0e"]
+
 [node name="Leaderboard" type="Node2D" unique_id=2031682556]
 script = ExtResource("1_2ygcv")
 
@@ -69,31 +71,45 @@ layout_mode = 2
 size_flags_horizontal = 6
 alignment = 1
 
-[node name="Username" type="TextEdit" parent="UI/MarginContainer/VBoxContainer" unique_id=1866296406]
+[node name="Inputs" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=1483387658]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Username" type="TextEdit" parent="UI/MarginContainer/VBoxContainer/Inputs" unique_id=1866296406]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 40)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_70y0e")
 placeholder_text = "Username"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=832835554]
+[node name="time_label" type="Label" parent="UI/MarginContainer/VBoxContainer/Inputs" unique_id=1661230955]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 40)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_70y0e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer" unique_id=832835554]
 layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Submit" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=880692585]
+[node name="Submit" type="Button" parent="UI/MarginContainer/VBoxContainer/Buttons" unique_id=880692585]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_70y0e")
 text = "Add entry"
 
-[node name="Home" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer" unique_id=674911197]
+[node name="Home" type="Button" parent="UI/MarginContainer/VBoxContainer/Buttons" unique_id=674911197]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_70y0e")
 text = "Home"
 
-[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/HBoxContainer/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Buttons/Submit" to="." method="_on_submit_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/VBoxContainer/Buttons/Home" to="." method="_on_home_pressed"]

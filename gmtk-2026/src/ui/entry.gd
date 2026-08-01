@@ -1,16 +1,19 @@
-extends Label
+extends RichTextLabel
 
 
 func _set_pos(pos: int) -> void:
-  text = text.replace("{pos}", str(pos + 1))
+	text = text.replace("{pos}", str(pos + 1))
 
 func _set_username(username: String) -> void:
-  text = text.replace("{username}", username)
+	text = text.replace("{username}", username)
 
 func _set_score(score: float) -> void:
-  text = text.replace("{score}", str(snapped(float(score), 0.01)))
+	var min : int  = score / 60
+	var sec : int = score - (min * 60)
+	text = text.replace("{min}", str(min))
+	text = text.replace("{sec}", str(sec))
 
 func set_data(pos: int, username: String, score: float) -> void:
-  _set_pos(pos)
-  _set_username(username)
-  _set_score(score)
+	_set_pos(pos)
+	_set_username(username)
+	_set_score(score)

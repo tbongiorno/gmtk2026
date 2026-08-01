@@ -23,7 +23,7 @@ func _enter_tree():
 
 @export_category("Movement")
 @export_subgroup("Settings")
-@export var SPEED := 6.0
+@export var SPEED := 10.0
 @export var ACCEL := 40.0
 @export var IN_AIR_SPEED := 3.0
 @export var IN_AIR_ACCEL := 5.0
@@ -169,11 +169,6 @@ func _process(delta):
 			$crosshair.modulate = Color(255, 255, 255)
 		num_shots -= 1
 		$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"
-	
-	if not hit_enemy:
-		SPEED = 5
-	else:
-		SPEED = 10
 	
 	
 	if !UPDATE_PLAYER_ON_PHYS_STEP:
