@@ -112,7 +112,7 @@ func _physics_process(delta):
 	
 	#print(get_floor_angle())
 	#print(get_floor_normal())
-	if is_on_floor() and get_floor_normal() == Vector3(0, 0, 0):
+	if is_on_floor() and get_floor_normal() == Vector3(0, 1, 0):
 		on_ramp = false
 	else:
 		on_ramp = true
@@ -168,7 +168,7 @@ func _process(delta):
 			hit_enemy = false
 			$crosshair.modulate = Color(255, 255, 255)
 		num_shots -= 1
-		$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"
+		%shots.text = "[tornado radius=5][color=red]" + str(num_shots) + "[/color][/tornado]"
 	
 	
 	if !UPDATE_PLAYER_ON_PHYS_STEP:
@@ -228,7 +228,7 @@ func move_player(delta):
 		is_jumping = true
 		$jump_timer.start()
 		num_jumps -= 1
-		$player_hud/jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
+		%jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
 		print(num_jumps)
 		
 	# Handle Dash
@@ -236,7 +236,7 @@ func move_player(delta):
 		is_dashing = true
 		$dash_timer.start()
 		num_dashes -= 1
-		$player_hud/dashes.text = "[shake][color=blue]" + str(num_dashes) + "[/color][/shake]"
+		%dashes.text = "[shake][color=blue]" + str(num_dashes)  + "[/color][/shake]"
 		print(num_dashes)
 		
 	#Handle Crouch
@@ -246,15 +246,6 @@ func move_player(delta):
 	else:
 		$Head.position.y = 0
 		is_crouching = false
-
-	#if not is_sliding and not on_ramp:
-	#		$slide_timer.start(0.5 * global_transform.basis.z.dot(velocity))
-	#	if on_ramp:
-	#		can_slide = true
-	#	is_sliding = true
-	#else:
-	#	is_sliding = false
-	#	can_slide = true
 
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
@@ -337,9 +328,10 @@ func reset_stats():
 	num_jumps = base_jumps
 	num_dashes = base_dashes
 	num_shots = base_shots
-	$player_hud/jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
-	$player_hud/dashes.text = "[shake][color=blue]" + str(num_dashes) + "[/color][/shake]"
-	$player_hud/shots.text = "[pulse][color=red]" + str(num_shots) + "[/color][/pulse]"
+	
+	%jumps.text = "[wave][color=green]" + str(num_jumps) + "[/color][/wave]"
+	%dashes.text = "[shake][color=blue]" + str(num_dashes)  + "[/color][/shake]"
+	%shots.text = "[tornado radius=5][color=red]" + str(num_shots) + "[/color][/tornado]"
 
 func no_move():
 	velocity = Vector3(0, 0, 0)

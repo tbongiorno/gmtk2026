@@ -2,8 +2,37 @@
 
 [ext_resource type="Script" uid="uid://d03c4i74531y7" path="res://src/ui/hud_node.gd" id="1_6sh2a"]
 
+[sub_resource type="FontFile" id="FontFile_6sh2a"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1wcma"]
+font = SubResource("FontFile_6sh2a")
+font_size = 40
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_6sh2a"]
 font_size = 40
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="hud_node" type="Control" unique_id=208336938]
 layout_mode = 3
@@ -15,18 +44,29 @@ grow_vertical = 2
 script = ExtResource("1_6sh2a")
 
 [node name="stopwatch" type="Label" parent="." unique_id=246196973]
-layout_mode = 0
-offset_left = 428.0
-offset_top = 50.0
-offset_right = 724.0
-offset_bottom = 125.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 100.0
+grow_horizontal = 0
+text = "100.00"
+label_settings = SubResource("LabelSettings_1wcma")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="pause" type="Label" parent="." unique_id=732380239]
 visible = false
-layout_mode = 0
-offset_left = 500.0
-offset_top = 50.0
-offset_right = 656.0
-offset_bottom = 105.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_6sh2a")
+horizontal_alignment = 1
+vertical_alignment = 1

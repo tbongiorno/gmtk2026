@@ -140,25 +140,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.983856, 32.78987, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0980229, 0)
 
 [node name="Marker3D2" type="Marker3D" parent="enemy_spawn_points" unique_id=1564928655]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.5, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 31.5, 15)
 
 [node name="Marker3D4" type="Marker3D" parent="enemy_spawn_points" unique_id=1502414150]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 32.5, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 31.5, -15)
 
 [node name="Marker3D5" type="Marker3D" parent="enemy_spawn_points" unique_id=1670228930]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.25, 22.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.25, 21.25, 0)
 
 [node name="Marker3D6" type="Marker3D" parent="enemy_spawn_points" unique_id=550827834]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 16.5, -45)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 15.5, -45)
 
 [node name="Marker3D7" type="Marker3D" parent="enemy_spawn_points" unique_id=394913060]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 16.5, -45)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 15.5, -45)
 
 [node name="Marker3D8" type="Marker3D" parent="enemy_spawn_points" unique_id=808245609]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 16.5, -75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, 15.5, -75)
 
 [node name="Marker3D10" type="Marker3D" parent="enemy_spawn_points" unique_id=501133076]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 16.5, -75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 15.5, -75)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=122214457]
 environment = SubResource("Environment_mlse4")

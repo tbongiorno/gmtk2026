@@ -12,7 +12,16 @@ var entry_scene = preload("res://src/ui/entry.tscn") # update this to a path tha
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	%time_label.text = "Your Time is " + str(int(time.curr_time_elapsed() / 60)) + ":" + str(int(time.curr_time_elapsed()) % 60)
+	var time_text = str(int(time.curr_time_elapsed() / 60)) + ":" + str(int(time.curr_time_elapsed()) % 60)
+	
+	if time_text != "0:0":
+		%time_label.text = "Your Time is " + time_text 
+		%Submit.disabled = false
+		%Username.editable = true
+	else:
+		%time_label.text = "No Current Time"
+		%Submit.disabled = true
+		%Username.editable = false
 	
 	if not time.is_time_stopped():
 		time.start_or_stop_time()
@@ -57,7 +66,7 @@ func _on_submit_pressed() -> void:
 	var res := await Talo.leaderboards.add_entry(leaderboard_internal_name, score)
 
 	_build_entries()
-	$UI/MarginContainer/VBoxContainer/Buttons/Submit.disabled = true
+	%Submit.disabled = true
 	
 
 

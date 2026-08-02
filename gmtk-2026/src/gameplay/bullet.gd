@@ -26,5 +26,5 @@ func init_bullet(target):
 func _on_area_3d_body_entered(body):
 	if body.name == "player":
 		body.hit()
-	print(body.name)
+	#print(body.name)
 	queue_free()

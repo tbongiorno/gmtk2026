@@ -98,6 +98,7 @@ theme_override_constants/separation = 40
 alignment = 1
 
 [node name="Submit" type="Button" parent="UI/MarginContainer/VBoxContainer/Buttons" unique_id=880692585]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 size_flags_horizontal = 4

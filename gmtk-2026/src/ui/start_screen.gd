@@ -16,3 +16,11 @@ func _on_start_game_pressed():
 	tween.tween_property($fade, "modulate", Color(0,0,0,1), 2)
 	await get_tree().create_timer(2).timeout
 	get_tree().change_scene_to_file("res://src/core/main_game/MainGame.tscn")
+
+
+func _on_leaderboards_pressed():
+	get_tree().change_scene_to_file("res://src/ui/leaderboard.tscn")
+
+
+func _on_exit_pressed():
+	get_tree().quit()

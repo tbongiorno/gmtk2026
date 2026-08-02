@@ -10,8 +10,6 @@
 
 [node name="player" type="CharacterBody3D" unique_id=2107680255]
 script = ExtResource("1_4j6do")
-SPEED = 8.0
-ACCEL = 50.0
 metadata/_custom_type_script = "uid://dae1t8ny86kln"
 
 [node name="Head" parent="." unique_id=323156219 instance=ExtResource("2_oyjl1")]
@@ -66,12 +64,13 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave][color=\"green\"]Jumps[/color][/wave]      [shake][color=\"blue\"]Dashes[/color] [/shake]      [pulse][color=\"red\"]Shots[/color][/pulse]"
+text = "[wave][color=\"green\"]Jumps[/color][/wave]      [shake][color=\"blue\"]Dashes[/color] [/shake]      [tornado radius=5][color=\"red\"]Shots[/color][/tornado]"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="jumps" type="RichTextLabel" parent="player_hud" unique_id=1481829126]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 32.0
 offset_top = 555.0
@@ -81,11 +80,12 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave][color=green][/color][/wave]"
+text = "[wave][color=green]{jump}[/color][/wave]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="dashes" type="RichTextLabel" parent="player_hud" unique_id=558813853]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 175.0
 offset_top = 555.0
@@ -95,11 +95,12 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[shake][color=blue][/color][/shake]"
+text = "[shake][color=blue]{dash}[/color][/shake]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="shots" type="RichTextLabel" parent="player_hud" unique_id=172374890]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 325.0
 offset_top = 555.0
@@ -109,7 +110,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[pulse][color=red][/color][/pulse]"
+text = "[tornado radius=5][color=red]{shot}[/color][/tornado]"
 horizontal_alignment = 1
 vertical_alignment = 1
 

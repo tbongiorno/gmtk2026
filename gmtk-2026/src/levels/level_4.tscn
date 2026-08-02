@@ -46,7 +46,7 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 script = ExtResource("1_8jqfp")
 jumps = 3
 dashes = 2
-shots = 7
+shots = 6
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2021626697]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.974075, 14.107322, -0.0029296875)
@@ -112,10 +112,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.18586, 16.48806, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 12, 0)
 
 [node name="Marker3D2" type="Marker3D" parent="enemy_spawn_points" unique_id=1831457625]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10.5, -2.15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11.229, -2.15)
 
 [node name="Marker3D3" type="Marker3D" parent="enemy_spawn_points" unique_id=2057893225]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 10.5, 2.15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 11.229, 2.15)
 
 [node name="Marker3D4" type="Marker3D" parent="enemy_spawn_points" unique_id=557424304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.5, 4.25, 10)
